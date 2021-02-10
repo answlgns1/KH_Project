@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lookbookMapper">
+
+	<resultMap type="hashmap" id="ResultMapBoard">
+		<id property="BNO" column="BNO" javaType="string" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<select id="selectLookbookList" parameterType="string" resultType="hashmap">
+		SELECT B.*, A.NEWFILENAME, A.FILEPATH,
+			   NVL((SELECT COUNT(*) FROM LIKELIST WHERE B.BNO = BNO GROUP BY B.BNO), 0) LIKE_COUNT
+		FROM BOARD B
+		JOIN ATTACHMENT A ON(B.BNO = A.BNO)
+		WHERE BTNO = 3
+		AND A.FINDEX = 0
+		AND B.BSTATUS = 'Y'
+		<choose>
+			<when test='sort == "time"'>ORDER BY B.BNO DESC</when>
+			<when test='sort == "views"'>ORDER BY B.VIEWS DESC</when>
+			<when test='sort == "like"'>ORDER BY LIKE_COUNT DESC</when>
+			<otherwise>ORDER BY B.BNO DESC</otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectOneLookbook" parameterType="_int" resultType="Board">
+		SELECT * FROM BOARD
+		WHERE BNO = #{bNo}
+		AND BTNO = 3
+	</select>
+	
+	<select id="selectLookbookSearch" resultType="hashmap">
+		SELECT B.*, A.NEWFILENAME, A.FILEPATH,
+			   NVL((SELECT COUNT(*) FROM LIKELIST WHERE B.BNO = BNO GROUP BY B.BNO), 0) LIKE_COUNT
+		FROM BOARD B
+		JOIN ATTACHMENT A ON(B.BNO = A.BNO)
+		WHERE B.BTNO = 3
+		AND A.FINDEX = 0
+		AND B.BSTATUS = 'Y'
+		<choose>
+			<when test='searchCt == "all"'>AND (B.BTITLE LIKE '%'||#{search}||'%' OR B.USERID LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "title"'>AND B.BTITLE LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "writer"'>AND B.USERID LIKE '%'||#{search}||'%'</when>
+		</choose>
+		ORDER BY B.BNO DESC
+	</select>
+	
+	<select id="selectLookbookTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM BOARD WHERE BTNO = 3 AND BSTATUS = 'Y'
+	</select>
+	
+	<select id="selectLookbookSearchCount" resultType="_int">
+		SELECT COUNT(*) FROM BOARD WHERE BTNO = 3 AND BSTATUS = 'Y'
+		<choose>
+			<when test='searchCt == "all"'>AND (BTITLE LIKE '%'||#{search}||'%' OR USERID LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "title"'>AND BTITLE LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "writer"'>AND USERID LIKE '%'||#{search}||'%'</when>
+		</choose>
+	</select>
+	
+	<select id="selectLookbookDetail" parameterType="_int" resultType="Map">
+		SELECT B.*, A.ANO, A.NEWFILENAME, A.FILEPATH,
+			   NVL((SELECT COUNT(*) FROM LIKELIST WHERE B.BNO = BNO GROUP BY B.BNO), 0) LIKE_COUNT,
+			   NVL((SELECT COUNT(*) FROM REPORT WHERE B.BNO = BNO GROUP BY B.BNO), 0) REPORT_COUNT,
+			   NVL((SELECT COUNT(*) FROM BOARDCOMMENT WHERE B.BNO = BNO AND CSTATUS = 'Y' GROUP BY B.BNO), 0) COMMENT_COUNT
+		FROM BOARD B
+		JOIN ATTACHMENT A ON(B.BNO = A.BNO)
+		WHERE B.BNO = #{ bno }
+		AND A.FINDEX = 0
+		AND B.BSTATUS = 'Y'
+	</select>
+	
+	<select id="selectLookbookCommentList" parameterType="_int" resultType="hashmap">
+		SELECT A.*
+			 , (SELECT NICKNAME FROM MEMBER WHERE USERID = A.USERID) AS WRITER
+			 , TO_CHAR(CDATE, 'YYYY.MM.DD HH24:mi') AS DATE2CHAR
+		FROM BOARDCOMMENT A
+		WHERE A.BNO = #{ bno } AND A.CSTATUS = 'Y' AND A.REVIEW = 'N'
+		ORDER BY CDATE, BCNO
+	</select>
+	
+	<insert id="insertLookbookComment" parameterType="hashmap">
+		INSERT INTO BOARDCOMMENT VALUES(SEQ_BCNO.NEXTVAL, #{BNO}, #{CCONTENTS}, #{USERID}, SYSDATE, 'Y', 'N', 0, DEFAULT)
+	</insert>
+	
+	<update id="updateLookbookComment" parameterType="hashmap">
+		UPDATE BOARDCOMMENT
+		SET CCONTENTS = #{ CCONTENTS }
+		WHERE BCNO = #{ BCNO }
+	</update>
+	
+	<update id="deleteLookbookComment" parameterType="_int">
+		UPDATE BOARDCOMMENT
+		SET CSTATUS = 'N'
+		WHERE BCNO = #{ bcNo }
+	</update>
+	
+	<insert id="insertLookbook" parameterType="Board">
+		INSERT INTO BOARD
+		VALUES (SEQ_BNO.NEXTVAL, 3, #{bTitle}, #{bContents}, #{userId}, SYSDATE, 0, 'Y')
+	</insert>
+	
+	<insert id="insertAttachment" parameterType="Attachment">
+	
+		<!-- selectKey 기능 -->
+		<!-- 다른 테이블의 정보를 외래키로 가져올 경우 사용하는 기능 -->
+		<selectKey keyProperty="bNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_BNO.CURRVAL FROM DUAL
+		</selectKey>
+
+		INSERT INTO ATTACHMENT
+		VALUES (SEQ_ANO.NEXTVAL, #{oldFileName}, #{newFileName}, #{filePath}, #{fIndex}, DEFAULT, #{bNo}, DEFAULT)
+	</insert>
+	
+	<select id="selectAttachmentList" parameterType="_int" resultType="hashmap">
+		SELECT * 
+		FROM ATTACHMENT 
+		WHERE BNO = #{ bno } 
+		AND FINDEX != 0
+		ORDER BY FINDEX ASC
+	</select>
+	
+	<update id="updateViews" parameterType="_int">
+		UPDATE BOARD
+		SET VIEWS = VIEWS + 1
+		WHERE BNO = #{ bNo } AND BSTATUS = 'Y'
+	</update>
+	
+	<update id="updateLookbook" parameterType="hashmap">
+		UPDATE BOARD
+		SET BTITLE = #{ bTitle },
+		    BCONTENTS = #{ bContents }
+		WHERE BNO = #{ bNo }
+	</update>
+	
+	<insert id="updateAttachment" parameterType="hashmap">
+		INSERT INTO ATTACHMENT VALUES
+		(SEQ_ANO.NEXTVAL, #{oldFileName}, #{newFileName}, #{filePath}, #{fIndex}, DEFAULT, #{bNo}, DEFAULT)
+	</insert>
+	
+	<delete id="deleteAttachment" parameterType="_int">
+		DELETE FROM ATTACHMENT WHERE BNO = #{ bNo }
+	</delete>
+	
+	<update id="deleteLookbook" parameterType="_int">
+		UPDATE BOARD
+		SET BSTATUS = 'N'
+		WHERE BNO = #{bno}
+	</update>
+	
+	<delete id="deleteFile" parameterType="_int">
+		DELETE FROM ATTACHMENT WHERE ANO = #{ aNo }
+	</delete>
+	
+	<update id="lookbookViewUp" parameterType="_int">
+		UPDATE BOARD
+		SET VIEWS = VIEWS + 1
+		WHERE BNO = #{ bno }
+	</update>
+	
+	<select id="AttachmentList" parameterType="_int" resultType="Attachment">
+		SELECT * 
+		FROM ATTACHMENT 
+		WHERE BNO = #{ bno }
+		ORDER BY FINDEX ASC
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+

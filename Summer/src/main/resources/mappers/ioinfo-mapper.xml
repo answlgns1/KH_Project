@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ioinfoMapper">
+	<insert id="">
+		INSERT INTO IOINFO 
+		VALUES(SEQ_IONO.NEXTVAL, 'O', '12001119, 1, 123456, user01, DEFAULT, DEFAULT, DEFAULT);
+	</insert>
+	
+</mapper>

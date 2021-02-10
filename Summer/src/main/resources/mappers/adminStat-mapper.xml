@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminStatMapper">
+	
+	<select id="selectRevenue19List" resultType="hashmap">
+		SELECT * FROM REVENUE
+		WHERE YEAR = 2019
+	</select>
+	
+	<select id="selectRevenue20List" resultType="hashmap">
+		SELECT * FROM REVENUE
+		WHERE YEAR = 2020
+	</select>
+	
+	<select id="selectRevenue21List" resultType="hashmap">
+		SELECT * FROM REVENUE
+		WHERE YEAR = 2021
+	</select>
+	
+	<select id="selectSellPd" resultType="map">
+		SELECT (SELECT SUM(IO.QUANTITY) FROM IOINFO IO JOIN PRODUCT P ON(IO.PCODE = P.PCODE) WHERE IO.IO = 'O' AND P.LCNO = 1) "top",
+       		   (SELECT SUM(IO.QUANTITY) FROM IOINFO IO JOIN PRODUCT P ON(IO.PCODE = P.PCODE) WHERE IO.IO = 'O' AND P.LCNO = 2) "pants",
+       	 	   (SELECT SUM(IO.QUANTITY) FROM IOINFO IO JOIN PRODUCT P ON(IO.PCODE = P.PCODE) WHERE IO.IO = 'O' AND P.LCNO = 3) "outer"
+		FROM DUAL
+	</select>
+	
+	<select id="selectUserGender" resultType="map">
+		SELECT (SELECT COUNT(GENDER) FROM MEMBER WHERE GENDER = 'M') "M",
+        	   (SELECT COUNT(GENDER) FROM MEMBER WHERE GENDER = 'F') "F"
+		FROM DUAL
+	</select>
+	
+	<select id="selectUserAge" resultType="hashmap">
+		SELECT COUNT(*) CNT
+  		FROM (SELECT CASE WHEN               AGE &lt; 20 THEN '10'
+                    	  WHEN AGE &gt;= 20 AND AGE &lt; 30 THEN '20'
+                    	  WHEN AGE &gt;= 30 AND AGE &lt; 40 THEN '30'
+                    	  WHEN AGE &gt;= 40 AND AGE &lt; 50 THEN '40'
+                	 END AGE_GB
+          	  FROM (SELECT TO_CHAR(SYSDATE, 'YYYY')-TO_NUMBER(SUBSTR(BIRTH, 1, 4)) AGE
+                    FROM MEMBER
+                   )
+              )
+ 		GROUP BY AGE_GB
+ 		ORDER BY AGE_GB
+	</select>
+	
+	
+</mapper>

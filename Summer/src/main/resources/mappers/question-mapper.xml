@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="questionMapper">
+	
+	<select id="selectQuestionList" resultType="hashmap">
+		SELECT * FROM QUESTION
+		ORDER BY QNO DESC
+	</select>
+  	<select id="selectQuestionTotalContents" resultType="_int">
+  		SELECT COUNT(*) FROM QUESTION
+  	</select>
+  	<select id="selectOneQuestion" parameterType="_int" resultType="Question">
+  		SELECT * FROM QUESTION
+  		WHERE QNO = #{qNo}
+  	</select>
+  
+  
+  	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  	<update id="updateReply" parameterType="Question">
+  		UPDATE QUESTION SET ACONTENTS = #{acontents}, ASTATUS = 'Y'
+  		WHERE QNO = #{qno}
+  	</update>
+  	
+  	<select id="answerList" parameterType="Question">
+  		SELECT ACONTENTS FROM QUESTION
+  		WHERE QNO=#{qNo}
+  	</select> 
+  	
+  	<update id="answerDelete" parameterType="_int">
+  		UPDATE QUESTION
+  		SET ASTATUS = 'N', ACONTENTS = null
+  		WHERE QNO = #{qno}
+  	</update>
+  	
+  	<!-- 유저 -->
+  	<select id="selectInquiryBoardList" resultType="hashmap">
+		SELECT * FROM QUESTION
+		ORDER BY QNO DESC
+	</select>
+  	
+  	<select id="selectInquiryBoardTotalContents" resultType="_int">
+  		SELECT COUNT(*) FROM QUESTION
+  	</select>
+  	
+  	<!-- 게시판 -->
+  	
+  	<insert id="insertInquiryBoard" parameterType="Question">
+  		INSERT INTO QUESTION
+  		VALUES ( SEQ_QNO.NEXTVAL, #{qtypeno}, #{qtitle}, #{qcontents}, #{userid}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT )
+  	</insert>
+  	
+  	<select id="selectOneInquiryBoard" parameterType="_int" resultType="Question">
+  		SELECT * FROM QUESTION
+  		WHERE QNO = #{qNo}
+  	</select>
+  	
+  	<delete id="deleteInquiryBoard" parameterType="_int">
+		DELETE FROM QUESTION
+		WHERE QNO = #{qno}
+	</delete>
+	
+	<!-- 검색 -->
+	
+	<select id="selectInquiryBoardSearch" resultType="hashmap">
+		SELECT * FROM QUESTION
+		<choose>
+			<when test='searchCt == "all"'>WHERE (QTITLE LIKE '%'||#{search}||'%' OR USERID LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "title"'>WHERE QTITLE LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "writer"'>WHERE USERID LIKE '%'||#{search}||'%'</when>
+		</choose>
+		ORDER BY QNO DESC
+	</select>
+	
+	<select id="selectInquiryBoardSearchCount" resultType="_int">
+		SELECT COUNT(*) FROM QUESTION
+		<choose>
+			<when test='searchCt == "all"'>WHERE (QTITLE LIKE '%'||#{search}||'%' OR USERID LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "title"'>WHERE QTITLE LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "writer"'>WHERE USERID LIKE '%'||#{search}||'%'</when>
+		</choose>
+	</select>
+  	  	
+</mapper>

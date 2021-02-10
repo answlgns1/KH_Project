@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMainMapper">
+	<select id="userCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBERSHIP != 'A'
+		AND MSTATUS = 'Y'
+	</select>
+	
+	<select id="likesCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM LIKELIST
+	</select>
+	
+	<select id="productsCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+	</select>
+	
+	<select id="commentsCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARDCOMMENT
+		WHERE CSTATUS = 'Y'
+	</select>
+	
+	<select id="selectProducts" resultType="hashmap">
+		SELECT *
+		FROM (SELECT P.*, A.FILEPATH, A.NEWFILENAME
+      		  FROM PRODUCT P JOIN ATTACHMENT A ON(P.PCODE = A.PCODE)
+      	      WHERE A.FINDEX = 0)
+		WHERE ROWNUM &lt; 6
+	</select>
+	
+	
+	
+</mapper>

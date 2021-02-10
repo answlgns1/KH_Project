@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+
+	<select id="selectNoticeList" resultType="hashmap">
+		SELECT * FROM BOARD
+		ORDER BY BNO DESC
+	</select>
+  	<select id="selectNoticeTotalContents" resultType="_int">
+  		SELECT COUNT(*) FROM BOARD
+  	</select>
+  	<select id="selectOneNotice" parameterType="_int" resultType="FAQ">
+  		SELECT * FROM BOARD
+  		WHERE BNO = #{bNo}
+  	</select>
+  	
+  	<!-- 관리자 문의사항 -->
+  	
+  	<select id="selectAdminNoticeList" resultType="hashmap">
+		SELECT * FROM BOARD
+		ORDER BY BNO DESC
+	</select>
+	
+  	<select id="selectAdminNoticeTotalContents" resultType="_int">
+  		SELECT COUNT(*) FROM BOARD
+  	</select>
+  	
+  	<select id="selectOneAdminNotice" parameterType="_int" resultType="FAQ">
+  		SELECT * FROM BOARD
+  		WHERE BNO = #{bNo}
+  	</select>
+  	
+	<insert id="insertAdminNotice" parameterType="FAQ">
+  		INSERT INTO BOARD
+  		VALUES ( SEQ_BNO.NEXTVAL, #{btNo}, #{bTitle}, #{bContents}, #{userId}, #{bDate}, DEFAULT, DEFAULT, DEFAULT)
+  	</insert> 
+  	
+  	<delete id="adminNoticeDelete" parameterType="_int">
+		DELETE FROM BOARD
+		WHERE BNO = #{bNo}
+	</delete>
+
+</mapper>

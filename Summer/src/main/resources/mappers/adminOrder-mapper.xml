@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminOrderMapper">
+
+	<select id="selectOrderList" resultType="hashmap">
+		SELECT * FROM ORDERINFO
+		ORDER BY ORDERDATE DESC
+	</select>
+	
+	<select id="selectOrderTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM ORDERINFO
+	</select>
+	
+	<select id="selectIOList" parameterType="_int" resultType="hashmap">
+		SELECT A.FILEPATH, A.NEWFILENAME, P.PNAME, I.QUANTITY, I.PRICE
+		FROM IOINFO I
+		JOIN ATTACHMENT A ON(I.PCODE = A.PCODE)
+		JOIN PRODUCT P ON(I.PCODE = P.PCODE)
+		WHERE A.FINDEX = 0
+		AND I.ONO = #{ono}
+		AND A.PCODE = I.PCODE
+		AND I.IO = 'O'
+	</select>
+	
+	<select id="selectOrderSearch" resultType="hashmap">
+		SELECT * FROM ORDERINFO
+		<choose>
+			<when test='searchCt == "all"'>WHERE (USERID LIKE '%'||#{search}||'%' OR RNAME LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "id"'>WHERE USERID LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "name"'>WHERE RNAME LIKE '%'||#{search}||'%'</when>
+		</choose>
+		ORDER BY ORDERDATE DESC
+	</select>
+	
+	<select id="selectOrderSearchCount" resultType="_int">
+		SELECT COUNT(*) FROM ORDERINFO
+		<choose>
+			<when test='searchCt == "all"'>WHERE (USERID LIKE '%'||#{search}||'%' OR RNAME LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "id"'>WHERE USERID LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "name"'>WHERE RNAME LIKE '%'||#{search}||'%'</when>
+		</choose>
+	</select>
+	
+	<select id="selectPointList" resultType="hashmap">
+		SELECT * FROM POINT
+		ORDER BY PDATE DESC
+	</select>
+	
+	<select id="selectPointTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM POINT
+	</select>
+	
+	<select id="selectPointSearch" resultType="hashmap">
+		SELECT * FROM POINT
+		<choose>
+			<when test='searchCt == "all"'>WHERE (USERID LIKE '%'||#{search}||'%' OR CONTENTS LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "id"'>WHERE USERID LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "name"'>WHERE CONTENTS LIKE '%'||#{search}||'%'</when>
+		</choose>
+		ORDER BY PDATE DESC
+	</select>
+	
+	<select id="selectPointSearchCount" resultType="_int">
+		SELECT COUNT(*) FROM POINT
+		<choose>
+			<when test='searchCt == "all"'>WHERE (USERID LIKE '%'||#{search}||'%' OR CONTENTS LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "id"'>WHERE USERID LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "content"'>WHERE CONTENTS LIKE '%'||#{search}||'%'</when>
+		</choose>
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

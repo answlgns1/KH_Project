@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 마이바티스 DB 연결 시 설정할 내용을 작성 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- 마이바티스 DB 연결 시 사용할 별칭 등록 -->
+	<typeAliases>
+		<typeAlias type="com.kh.summer.user.member.model.vo.Member" alias="Member" />
+		<typeAlias type="com.kh.summer.user.board.model.vo.Board" alias="Board" />
+		<!-- <typeAlias type="com.kh.summer.user.board.model.vo.Attachment" alias="Attachment" /> -->
+		<typeAlias type="com.kh.summer.user.cart.model.vo.Cart" alias="Cart" />
+		<typeAlias type="com.kh.summer.user.attachment.model.vo.Attachment" alias="Attachment" />
+		<typeAlias type="com.kh.summer.user.product.model.vo.Product" alias="Product" />
+		<typeAlias type="com.kh.summer.user.report.model.vo.Report" alias="Report" />
+		<typeAlias type="com.kh.summer.user.orderinfo.model.vo.OrderInfo" alias="OrderInfo" />
+		<typeAlias type="com.kh.summer.admin.customerService.model.vo.Question" alias="Question" />
+		<typeAlias type="com.kh.summer.user.top.model.vo.Top" alias="Top" />
+		<typeAlias type="com.kh.summer.user.pants.model.vo.Pants" alias="Pants" />
+		<typeAlias type="com.kh.summer.user.faq.model.vo.FAQ" alias="FAQ" />
+		<typeAlias type="com.kh.summer.user.ioinfo.model.vo.IoInfo" alias="IoInfo" />
+	</typeAliases>
+	
+	<!-- 해당 프로젝트에서 사용하기 위한 TypeHandler 등록 -->
+	<typeHandlers>
+		<!-- 해당 패키지의 모든 핸들러 등록하기 -->
+		<!-- <package name=""/> -->
+	</typeHandlers>
+	
+</configuration>

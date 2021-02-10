@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderinfoMapper">
+
+	<select id="selectOIList" parameterType="string" resultType="Map">
+		SELECT ONO, ORDERINFO, TOTALPRICE, ORDERDATE, OSNO, OSNAME
+		FROM ORDERINFO
+		JOIN ORDERSTATUS USING(OSNO)
+		WHERE USERID = #{ userId }
+	</select>
+  
+  	<select id="insertOI" parameterType="OrderInfo" >
+		INSERT INTO ORDERINFO
+		VALUES (SEQ_ONO.NEXTVAL, #{ rName }, #{ rAddress }, #{ rPhone } ,DEFAULT,#{ totalPrice }
+		,#{ userId },DEFAULT, DEFAULT, #{ orderInfo }, 1, DEFAULT, DEFAULT )
+	</select>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="faqMapper">
+	
+	<select id="selectFAQList" resultType="hashmap">
+		SELECT * FROM FAQ
+		ORDER BY FNO DESC
+	</select>
+  	<select id="selectFAQTotalContents" resultType="_int">
+  		SELECT COUNT(*) FROM FAQ
+  	</select>
+  	<select id="selectOneFAQ" parameterType="_int" resultType="FAQ">
+  		SELECT * FROM FAQ
+  		WHERE FNO = #{fNo}
+  	</select>
+  	
+	<insert id="insertFAQ" parameterType="FAQ">
+  		INSERT INTO FAQ
+  		VALUES ( SEQ_FNO.NEXTVAL, #{qtypeno}, #{ftitle}, #{fcontents}, #{userid}, #{fdate})
+  	</insert> 
+  	
+  	<delete id="deleteFAQ" parameterType="_int">
+		DELETE FROM FAQ
+		WHERE FNO = #{fno}
+	</delete>	
+
+</mapper>

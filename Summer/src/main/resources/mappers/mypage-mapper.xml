@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypageMapper">
+
+	<select id="selectReviewList" parameterType="string" resultType="hashmap">
+		SELECT  B.BNO, BTITLE, BC.CCONTENTS, BC.CDATE
+		FROM BOARD B
+		JOIN BOARDCOMMENT BC ON(B.BNO = BC.BNO)
+		WHERE B.BTNO = 2
+		AND REVIEW = 'Y'
+		AND CSTATUS = 'Y'
+		AND BC.USERID = #{userId}
+		ORDER BY BC.CDATE DESC
+	</select>
+	
+	<select id="selectReviewTotalContents" parameterType="string" resultType="_int">
+		SELECT  COUNT(*)
+		FROM BOARDCOMMENT
+		WHERE CSTATUS = 'Y'
+		AND REVIEW = 'Y'
+		AND USERID = #{userId}
+	</select>
+	
+	<select id="selectLikeList" parameterType="string" resultType="hashmap">
+		SELECT L.BNO, B.BTITLE, B.USERID, LDATE
+		FROM LIKELIST L
+		JOIN BOARD B ON(L.BNO=B.BNO)
+		WHERE L.USERID = #{userId}
+		AND B.BSTATUS = 'Y'
+		ORDER BY LDATE DESC
+	</select>
+	
+	<select id="selectLikeTotalContents" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM LIKELIST L
+		JOIN BOARD B ON(L.BNO=B.BNO)
+		WHERE B.BSTATUS = 'Y'
+		AND L.USERID = #{userId}
+		GROUP BY L.USERID
+	</select>
+	
+	<select id="selectPointList" parameterType="string" resultType="hashmap">
+		SELECT O.ONO, O.ORDERINFO, P.EARN, P.USE, P.PDATE
+		FROM POINT P
+		JOIN ORDERINFO O ON(O.ONO=P.ONO)
+		WHERE P.USERID = #{userId}
+		ORDER BY P.PDATE DESC
+	</select>
+	
+	<select id="selectPointTotalContents" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM POINT P
+		JOIN ORDERINFO O ON(O.ONO=P.ONO)
+		WHERE P.USERID = #{userId}
+		GROUP BY P.USERID
+	</select>
+	
+	<select id="selectTopSize" parameterType="string" resultType="Top">
+		SELECT * FROM TOP
+		WHERE USERID = #{userId}
+	</select>
+	
+	<select id="selectPantsSize" parameterType="string" resultType="Pants">
+		SELECT * FROM PANTS
+		WHERE USERID = #{userId}
+	</select>
+	
+	<insert id="insertTopSize" parameterType="map">
+		INSERT INTO TOP
+		VALUES(SEQ_TOPNO.NEXTVAL, DEFAULT, #{userId}, DEFAULT, #{total}, #{shoulder}, #{chest}, #{sleeve})
+	</insert>
+	
+	<insert id="insertPantsSize" parameterType="map">
+		INSERT INTO PANTS
+		VALUES(SEQ_PANTSNO.NEXTVAL, DEFAULT, #{userId}, DEFAULT, #{total}, #{waist}, #{thigh}, #{rise}, #{hem})
+	</insert>
+	
+	<update id="updateTopSize" parameterType="map">
+		UPDATE TOP
+		SET TOTAL = #{total}, SHOULDER = #{shoulder}, CHEST = #{chest}, SLEEVE = #{sleeve}
+		WHERE USERID = #{userId}
+	</update>
+	
+	<update id="updatePantsSize" parameterType="map">
+		UPDATE PANTS
+		SET TOTAL = #{total}, WAIST = #{waist}, THIGH = #{thigh}, RISE = #{rise}, HEM = #{hem}
+		WHERE USERID = #{userId}
+	</update>
+	
+	<select id="selectQuestionList" parameterType="string" resultType="hashmap">
+		SELECT Q.QNO, QT.QTYPENAME, Q.QTITLE, Q.ASTATUS, Q.QDATE
+		FROM QUESTION Q
+		JOIN QUESTIONTYPE QT ON(Q.QTYPENO=QT.QTYPENO)
+		WHERE Q.USERID = #{userId}
+		ORDER BY Q.QDATE DESC
+	</select>
+	
+	<select id="selectQuestionTotalContents" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM QUESTION Q
+		WHERE USERID = #{userId}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

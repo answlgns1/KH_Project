@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminProductMapper">
+
+	<select id="selectProductList" resultType="hashmap">
+		SELECT P.*, A.FILEPATH, A.NEWFILENAME
+		FROM PRODUCT P
+		JOIN ATTACHMENT A ON (P.PCODE = A.PCODE)
+		WHERE A.FINDEX = 0
+		<choose>
+			<when test='sort == "top"'>AND P.LCNO = 1</when>
+			<when test='sort == "pants"'>AND P.LCNO = 2</when>
+			<when test='sort == "outer"'>AND P.LCNO = 3</when>
+			<otherwise></otherwise>
+		</choose>
+		ORDER BY P.PCODE DESC
+	</select>
+	
+	<select id="selectProductTotalContents" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT P
+		JOIN ATTACHMENT A ON (P.PCODE = A.PCODE)
+		WHERE A.FINDEX = 0
+		<choose>
+			<when test='sort == "top"'>AND P.LCNO = 1</when>
+			<when test='sort == "pants"'>AND P.LCNO = 2</when>
+			<when test='sort == "outer"'>AND P.LCNO = 3</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectProductSearch" resultType="hashmap">
+		SELECT P.*, A.FILEPATH, A.NEWFILENAME
+		FROM PRODUCT P
+		JOIN ATTACHMENT A ON (P.PCODE = A.PCODE)
+		WHERE A.FINDEX = 0
+		<choose>
+			<when test='searchCt == "all"'>AND (P.PNAME LIKE '%'||#{search}||'%' OR P.PDESCRIPTION LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "pname"'>AND P.PNAME LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "pcontents"'>AND P.PDESCRIPTION LIKE '%'||#{search}||'%'</when>
+		</choose>
+		ORDER BY P.PCODE DESC
+	</select>
+	
+	<select id="selectProductSearchCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT P
+		JOIN ATTACHMENT A ON (P.PCODE = A.PCODE)
+		WHERE A.FINDEX = 0
+		<choose>
+			<when test='searchCt == "all"'>AND (P.PNAME LIKE '%'||#{search}||'%' OR P.PDESCRIPTION LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "pname"'>AND P.PNAME LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "pcontents"'>AND P.PDESCRIPTION LIKE '%'||#{search}||'%'</when>
+		</choose>
+	</select>
+	
+	<select id="selectProductDetail" parameterType="string" resultType="map">
+		SELECT P.*, A.FILEPATH, A.NEWFILENAME
+		FROM PRODUCT P
+		JOIN ATTACHMENT A ON(P.PCODE = A.PCODE)
+		WHERE P.PCODE = #{pcode}
+		AND A.FINDEX = 0
+	</select>
+	
+	<select id="selectProductImg" parameterType="string" resultType="hashmap">
+		SELECT * FROM ATTACHMENT
+		WHERE PCODE = #{pcode}
+		AND FINDEX != 0
+		ORDER BY FINDEX ASC
+	</select>
+	
+	<select id="selectOneProduct" parameterType="string" resultType="Product">
+		SELECT * FROM PRODUCT
+		WHERE PCODE = #{pCode}
+	</select>
+	
+	<select id="AttachmentList" parameterType="string" resultType="Attachment">
+		SELECT * FROM ATTACHMENT
+		WHERE PCODE = #{pCode}
+	</select>
+	
+	<select id="selectAttachmentList" parameterType="string" resultType="hashmap">
+		SELECT * 
+		FROM ATTACHMENT 
+		WHERE PCODE = #{ pCode }
+		ORDER BY FINDEX ASC
+	</select>
+	
+	<update id="updateProduct" parameterType="Product">
+		UPDATE PRODUCT
+		SET PNAME = #{pName},
+			PPRICE = #{pPrice},
+			PDESCRIPTION = #{pDescription}
+		WHERE PCODE = #{pCode}
+	</update>
+	
+	<delete id="deleteAttachment" parameterType="string">
+		DELETE FROM ATTACHMENT WHERE PCODE = #{pCode}
+	</delete>
+	
+	<insert id="updateAttachment" parameterType="hashmap">
+		INSERT INTO ATTACHMENT VALUES
+		(SEQ_ANO.NEXTVAL, #{oldFileName}, #{newFileName}, #{filePath}, #{fIndex}, #{pCode}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<insert id="insertProduct" parameterType="Product">
+		INSERT INTO PRODUCT
+		VALUES ('120'||#{lcNo}||SEQ_PCODE.NEXTVAL, #{pName}, #{pPrice}, #{lcNo}, DEFAULT, DEFAULT, DEFAULT,
+				#{pDescription}, #{pStock}, DEFAULT)
+	</insert>
+	
+	<insert id="insertAttachment" parameterType="hashmap">
+		<selectKey keyProperty="pCode" resultType="string" order="BEFORE">
+			SELECT '120'||#{lcNo}||SEQ_PCODE.CURRVAL FROM DUAL
+		</selectKey>
+
+		INSERT INTO ATTACHMENT
+		VALUES (SEQ_ANO.NEXTVAL, #{a.oldFileName}, #{a.newFileName}, #{a.filePath}, #{a.fIndex}, #{pCode}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="selectPCode" parameterType="_int" resultType="string">
+		SELECT '120'||#{lcNo}||SEQ_PCODE.CURRVAL FROM DUAL
+	</select>
+	
+	<insert id="insertTopSize" parameterType="Top">
+		INSERT INTO TOP
+		VALUES (SEQ_TOPNO.NEXTVAL, #{pCode}, DEFAULT, #{tSize}, #{total}, #{shoulder}, #{chest}, #{sleeve})
+	</insert>
+	
+	<insert id="insertPantsSize" parameterType="Pants">
+		INSERT INTO PANTS
+		VALUES (SEQ_PANTSNO.NEXTVAL, #{pCode}, DEFAULT, #{pSize}, #{total}, #{waist}, #{thigh}, #{rise}, #{hem})
+	</insert>
+	
+	<select id="selectIOList" resultType="hashmap">
+		SELECT *
+		FROM IOINFO
+		<choose>
+			<when test='sort == "in"'>WHERE IO = 'I'</when>
+			<when test='sort == "out"'>WHERE IO = 'O'</when>
+			<otherwise></otherwise>
+		</choose>
+		ORDER BY IODATE DESC
+	</select>
+	
+	<select id="selectIOTotalContents" resultType="_int">
+		SELECT COUNT(*)
+		FROM IOINFO
+		<choose>
+			<when test='sort == "in"'>WHERE IO = 'I'</when>
+			<when test='sort == "out"'>WHERE IO = 'O'</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectIOSearch" resultType="hashmap">
+		SELECT *
+		FROM IOINFO
+		<choose>
+			<when test='searchCt == "all"'>WHERE (IONO LIKE '%'||#{search}||'%' OR USERID LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "iono"'>WHERE IONO LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "userid"'>WHERE USERID LIKE '%'||#{search}||'%'</when>
+		</choose>
+		ORDER BY IODATE DESC
+	</select>
+	
+	<select id="selectIOSearchCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM IOINFO
+		<choose>
+			<when test='searchCt == "all"'>WHERE (IONO LIKE '%'||#{search}||'%' OR USERID LIKE '%'||#{search}||'%')</when>
+			<when test='searchCt == "iono"'>WHERE IONO LIKE '%'||#{search}||'%'</when>
+			<when test='searchCt == "userid"'>WHERE USERID LIKE '%'||#{search}||'%'</when>
+		</choose>
+	</select>
+	
+	<select id="pList" resultType="hashmap">
+		SELECT P.*, A.FILEPATH, A.NEWFILENAME
+		FROM PRODUCT P
+		JOIN ATTACHMENT A ON(P.PCODE = A.PCODE)
+		WHERE A.FINDEX = 0
+	</select>
+	
+	<select id="selectOneP" resultType="map">
+		SELECT P.*, A.FILEPATH, A.NEWFILENAME
+		FROM PRODUCT P
+		JOIN ATTACHMENT A ON(P.PCODE = A.PCODE)
+		WHERE A.FINDEX = 0
+		AND P.PCODE = #{pcode}
+	</select>
+	
+	<insert id="insertI" parameterType="hashmap">
+		<selectKey keyProperty="price" resultType="_int" order="BEFORE">
+			SELECT PPRICE FROM PRODUCT WHERE PCODE = #{pcode}
+		</selectKey>
+	
+		INSERT INTO IOINFO
+		VALUES(SEQ_IONO.NEXTVAL, 'I', #{pcode}, #{addStock}, #{price}, 'admin', DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<update id="updateStock" parameterType="hashmap">
+		UPDATE PRODUCT
+		SET PSTOCK = PSTOCK + #{addStock}
+		WHERE PCODE = #{pcode}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

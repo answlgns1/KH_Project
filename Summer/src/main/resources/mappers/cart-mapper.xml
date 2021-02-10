@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cartMapper">
+
+	<select id="selectCartList" parameterType="string" resultType="Map">
+		SELECT PCODE, C.USERID, C.CARTNO, C.AMOUNT, P.PNAME, P.PPRICE, A.NEWFILENAME, A.FILEPATH
+		FROM CART C
+		JOIN PRODUCT P USING(PCODE)
+		JOIN ATTACHMENT A USING(PCODE)
+		WHERE USERID = #{ userId }
+		AND A.FINDEX = 0
+	</select>
+	
+	<delete id="deleteCart" parameterType="_int">
+		DELETE FROM CART
+		WHERE CARTNO = #{ cartNo }
+	</delete>
+	
+	<select id="selectCartTotalContents" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM CART C
+		JOIN PRODUCT P USING(PCODE)
+		JOIN ATTACHMENT A USING(PCODE)
+		WHERE USERID = #{ userId }
+		AND A.FINDEX = 0
+	</select>
+  
+</mapper>
