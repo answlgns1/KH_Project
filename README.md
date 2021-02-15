@@ -21,6 +21,9 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ## 데이터베이스 모델
 ![semi3](https://user-images.githubusercontent.com/73204072/107928694-00a0b900-6fbc-11eb-8c92-3982d94e3e62.jpg)
+
+## SWOT 분석
+![semi7](https://user-images.githubusercontent.com/73204072/107942985-5af74500-6fcf-11eb-9f4a-d4f3b4cf572a.jpg)
 ***
 
 ## 기능구현
