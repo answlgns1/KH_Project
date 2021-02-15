@@ -16,7 +16,11 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 ![final1](https://user-images.githubusercontent.com/73204072/107943942-be35a700-6fd0-11eb-89bb-d4d42d28a6fe.jpg)
 
 ## 데이터베이스 모델
+![final2](https://user-images.githubusercontent.com/73204072/107944051-ec1aeb80-6fd0-11eb-82b0-f4f0a7ec440c.jpg)
 
+## SWOT 분석
+
+***
 
 ## ◎세미 프로젝트
 #### 자연 친화적으로 깨끗한 식품을 제공하는 쇼핑몰
