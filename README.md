@@ -16,6 +16,8 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 ## 개발 도구
 ![semi2](https://user-images.githubusercontent.com/73204072/107928328-82dcad80-6fbb-11eb-8d21-1c20989718c3.jpg)
 
-
 ## 데이터베이스 모델
 ![semi3](https://user-images.githubusercontent.com/73204072/107928694-00a0b900-6fbc-11eb-8c92-3982d94e3e62.jpg)
+***
+
+## 기능구현
