@@ -21,3 +21,5 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 ***
 
 ## 기능구현
+- 메인페이지
+![semi4](https://user-images.githubusercontent.com/73204072/107931760-10ba9780-6fc0-11eb-8648-d1ed795af905.gif)
