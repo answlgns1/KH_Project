@@ -24,7 +24,15 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 - 메인페이지
 
 ![semi4](https://user-images.githubusercontent.com/73204072/107935312-917b9280-6fc4-11eb-93ac-46648c6c5c7f.gif)
-<br/>
+
+<br/><br/>
+
 - 로그인
 
 ![semi5](https://user-images.githubusercontent.com/73204072/107935143-57aa8c00-6fc4-11eb-8b98-23f3f31a8172.gif)
+
+<br/><br/>
+
+- 관리자(회원관리)
+
+![semi6](https://user-images.githubusercontent.com/73204072/107942458-9e9d7f00-6fce-11eb-9ba6-1a79dcaec6fe.gif)
