@@ -23,8 +23,8 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 ## 기능구현
 - 메인페이지
 
-![semi4](https://user-images.githubusercontent.com/73204072/107933675-68f29900-6fc2-11eb-85ac-501c216c45cb.gif)
-
+![semi4](https://user-images.githubusercontent.com/73204072/107935312-917b9280-6fc4-11eb-93ac-46648c6c5c7f.gif)
+<br/>
 - 로그인
 
 ![semi5](https://user-images.githubusercontent.com/73204072/107935143-57aa8c00-6fc4-11eb-8b98-23f3f31a8172.gif)
