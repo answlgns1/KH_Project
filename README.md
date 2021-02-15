@@ -19,7 +19,7 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 ![final2](https://user-images.githubusercontent.com/73204072/107944051-ec1aeb80-6fd0-11eb-82b0-f4f0a7ec440c.jpg)
 
 ## SWOT 분석
-
+![final3](https://user-images.githubusercontent.com/73204072/107944114-02c14280-6fd1-11eb-8576-8dfc64107e6f.jpg)
 ***
 
 ## ◎세미 프로젝트
