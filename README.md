@@ -29,8 +29,6 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final4](https://user-images.githubusercontent.com/73204072/108020966-e7057d00-7060-11eb-8681-6aaf22991263.gif)
 
-<br/><br/>
-
 - 로그인
 
 ## ◎세미 프로젝트
