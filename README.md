@@ -29,6 +29,8 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final4](https://user-images.githubusercontent.com/73204072/108020966-e7057d00-7060-11eb-8681-6aaf22991263.gif)
 
+---
+
 - 회원가입 / 로그인
 
 ![final5](https://user-images.githubusercontent.com/73204072/108029870-964a5000-7071-11eb-9740-a460be59932f.gif)
@@ -60,13 +62,13 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![semi4](https://user-images.githubusercontent.com/73204072/107935312-917b9280-6fc4-11eb-93ac-46648c6c5c7f.gif)
 
-<br/><br/>
+---
 
 - 로그인
 
 ![semi5](https://user-images.githubusercontent.com/73204072/107935143-57aa8c00-6fc4-11eb-8b98-23f3f31a8172.gif)
 
-<br/><br/>
+---
 
 - 관리자 페이지 (회원관리)
 
