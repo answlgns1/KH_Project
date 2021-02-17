@@ -35,6 +35,14 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final5](https://user-images.githubusercontent.com/73204072/108029870-964a5000-7071-11eb-9740-a460be59932f.gif)
 
+---
+
+- 마이페이지
+
+![final6](https://user-images.githubusercontent.com/73204072/108159446-69a63f00-712a-11eb-8671-a93af455bcc6.gif)
+
+---
+
 ## ◎세미 프로젝트
 #### 자연 친화적으로 깨끗한 식품을 제공하는 쇼핑몰
 - [ **Zero Waste** ] 환경보호를 지향합니다
