@@ -46,6 +46,12 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final6](https://user-images.githubusercontent.com/73204072/108159446-69a63f00-712a-11eb-8671-a93af455bcc6.gif)
 
+![final_cart](https://user-images.githubusercontent.com/73204072/109638932-eeb13f80-7b91-11eb-9a41-988056aee4ee.png)
+
+1. 장바구니 목록 조회 시 List안에 Map이 있는 형태로 여러 정보를 조회
+2. totalContents에 조회하는 장바구니 정보의 총 갯수를 저장 (페이징처리에 필요)
+3. 장바구니 삭제는 view에서 Ajax로 실시간으로 삭제하도록 했기 때문에 @ResponseBody 어노테이션을 사용하여 JSON 형태로 반환
+
 ---
 
 - 룩북
