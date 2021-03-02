@@ -35,6 +35,11 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final5](https://user-images.githubusercontent.com/73204072/108029870-964a5000-7071-11eb-9740-a460be59932f.gif)
 
+![final_enroll](https://user-images.githubusercontent.com/73204072/109636347-d1c73d00-7b8e-11eb-94b3-8bfd6a3e49b7.png)
+
+1. 회원가입에서 작성한 정보를 Member 객체에 저장
+2. 비밀번호 암호화를 위해 Spring Security에서 제공하는 BCryptPasswordEncoder를 사용
+3. 회원가입 후 메인페이지로 이동하기 위해 loc에 메인페이지 주소를 저장
 ---
 
 - 마이페이지
