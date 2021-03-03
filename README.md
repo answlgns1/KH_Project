@@ -72,8 +72,11 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final_stat](https://user-images.githubusercontent.com/73204072/109771126-ce3fbe80-7c3f-11eb-8cd1-9466adc1fc1f.png)
 
+![final_stat2](https://user-images.githubusercontent.com/73204072/109772557-786c1600-7c41-11eb-9d61-2a50733af4f3.png)
+
 1. 라이브러리인 chart.js 를 사용하여 통계 시각화자료 구현
 2. user_age를 List<Map<String, String>> 형태로 정보를 받아왔기 때문에 c:forEach로 하나씩 꺼내서 사용
+3. Mybatis 에서 부등호를 사용할 때 > , < 를 사용하지 못하여 &gt; , &lt; 를 사용
 
 ---
 
