@@ -58,7 +58,7 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final7](https://user-images.githubusercontent.com/73204072/108160631-c73b8b00-712c-11eb-9dd0-73d98699416f.gif)
 
-![final_lookbook](https://user-images.githubusercontent.com/73204072/109769647-d72f9080-7c3d-11eb-9ee6-f332fa9b11d4.png)
+![final_lookbook](https://user-images.githubusercontent.com/73204072/109770649-29bd7c80-7c3f-11eb-9053-5961f0d2fc60.png)
 
 1. 룩북을 등록할 때 여러 장의 사진을 등록해야 하므로 MultipartFile을 사용
 2. for each 문으로 사진을 한장 씩 꺼내어 Attachment 객체인 at 생성 후 정보 저장
