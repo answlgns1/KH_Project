@@ -70,6 +70,11 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final8](https://user-images.githubusercontent.com/73204072/108161072-9d369880-712d-11eb-9edc-ec4c6acdcdee.gif)
 
+![final_stat](https://user-images.githubusercontent.com/73204072/109771126-ce3fbe80-7c3f-11eb-8cd1-9466adc1fc1f.png)
+
+1. 라이브러리인 chart.js 를 사용하여 통계 시각화자료 구현
+2. user_age를 List<Map<String, String>> 형태로 정보를 받아왔기 때문에 c:forEach로 하나씩 꺼내서 사용
+
 ---
 
 - 상품관리 ( 목록조회, 수정 )
