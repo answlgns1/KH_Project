@@ -84,6 +84,12 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final9](https://user-images.githubusercontent.com/73204072/108163583-a5450700-7132-11eb-8b7b-bb806d8988b1.gif)
 
+![final_product1](https://user-images.githubusercontent.com/73204072/110592548-c80c8d80-81bd-11eb-9082-89d2b5afa188.png)
+
+1. MyBatis의 동적 SQL문인 choose문을 사용하여 상품의 분류별로 정렬 가능 (상의, 하의, 아우터)
+2. Attachment 테이블의 FINDEX 컬럼은 대표이미지(0)와 상세 이미지(1 2 3 ...)를 의미
+3. 목록에서는 대표이미지만 필요하기 때문에 FINDEX가 0인 이미지의 정보만 조회
+
 ---
 
 - 상품관리 ( 등록 )
