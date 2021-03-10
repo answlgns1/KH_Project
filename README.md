@@ -108,6 +108,11 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final11](https://user-images.githubusercontent.com/73204072/108164319-e25dc900-7133-11eb-8982-cd41136c4642.gif)
 
+![final_product3](https://user-images.githubusercontent.com/73204072/110597624-2472ab80-81c4-11eb-8dd2-bae658dfc227.png)
+
+1. 상품입고 시 상품을 선택하면 비동기 통신방식인 AJAX를 활용하여 화면 변화없이 상품의 정보를 조회
+2. 조회해온 상품 정보를 
+
 ---
 
 - 회원관리
