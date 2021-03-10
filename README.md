@@ -96,6 +96,12 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![final10](https://user-images.githubusercontent.com/73204072/108164001-564ba180-7133-11eb-81b4-662a1932edd8.gif)
 
+![final_product2](https://user-images.githubusercontent.com/73204072/110595958-0a37ce00-81c2-11eb-8283-605f9edcf99b.png)
+
+1. topS 배열의 4번째에 상의에 대한 사이즈라고 식별할 수 있는 데이터를 저장 (Top)
+2. S, M, L 사이즈별 치수를 Top 객체에 저장
+3. Map<String, Object> 형태의 size에 사이즈별 Top 객체를 저장
+
 ---
 
 - 상품관리 ( 입출고관리)
