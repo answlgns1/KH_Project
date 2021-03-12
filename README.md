@@ -166,10 +166,22 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 1. 한글이 깨지지 않도록 response.setContentType을 UTF-8로 설정
 2. 로그인 화면에서 아이디와 비밀번호를 받아서 Member 객체에 저장
-3. DB에 접근하여 해당 아이디와 비밀번호가 일치하는 정보가 있다면 세션영역에 member 저장
+3. 데이터베이스에 접근하여 해당 아이디와 비밀번호가 일치하는 정보가 있다면 세션영역에 member 저장
 
 ---
 
 - 관리자 페이지 (회원관리)
 
 ![semi6](https://user-images.githubusercontent.com/73204072/107942458-9e9d7f00-6fce-11eb-9ba6-1a79dcaec6fe.gif)
+
+![semi9](https://user-images.githubusercontent.com/73204072/110903279-8a893b00-834a-11eb-8ddc-fb041147977c.png)
+
+1.  회원 등급을 선택할 경우 해당 아이디와 선택한 등급을 JSON 형태로 전송
+2.  DB에서 해당 아이디의 등급을 변경 후 int 형태로 결과를 반환
+3.  switch 문을 이용하여 grade에 변경된 등급을 저장 후 버튼의 텍스트를 변경
+
+---
+
+- 관리자 페이지 (상품 관리)
+
+
