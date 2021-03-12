@@ -162,10 +162,11 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 ![semi5](https://user-images.githubusercontent.com/73204072/107935143-57aa8c00-6fc4-11eb-8b98-23f3f31a8172.gif)
 
-![semi8](https://user-images.githubusercontent.com/73204072/110902453-43e71100-8349-11eb-9ba0-e212027239f3.png)
+![semi8](https://user-images.githubusercontent.com/73204072/110902811-cbcd1b00-8349-11eb-9b62-204f274669d2.png)
 
-1. 로그인 화면에서 아이디와 비밀번호를 받아서 Member 객체에 저장
-2. DB에 접근하여 해당 아이디와 비밀번호가 일치하는 정보가 있다면 세션영역에 member 저장
+1. 한글이 깨지지 않도록 response.setContentType을 UTF-8로 설정
+2. 로그인 화면에서 아이디와 비밀번호를 받아서 Member 객체에 저장
+3. DB에 접근하여 해당 아이디와 비밀번호가 일치하는 정보가 있다면 세션영역에 member 저장
 
 ---
 
