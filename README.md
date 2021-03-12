@@ -184,4 +184,4 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 
 - 관리자 페이지 (상품 관리)
 
-
+![semi7](https://user-images.githubusercontent.com/73204072/110903960-97f2f500-834b-11eb-8a95-3b7883b9b30c.gif)
