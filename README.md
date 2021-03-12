@@ -185,3 +185,14 @@ KH정보교육원에서 진행한 세미, 파이널 프로젝트 자료
 - 관리자 페이지 (상품 관리)
 
 ![semi7](https://user-images.githubusercontent.com/73204072/110903960-97f2f500-834b-11eb-8a95-3b7883b9b30c.gif)
+
+![semi10](https://user-images.githubusercontent.com/73204072/110904233-ffa94000-834b-11eb-927e-66bfa14a8c8d.png)
+
+1. Product 객체에 상품에 대한 정보를 저장 (상품 이름, 가격 등)
+2. 위에서 originNames라는 리스트에 역순으로 파일이 저장됐기 때문에 for문을 역순으로 꺼낸다.
+3. Attachment 객체에 정보를 저장 후 list에 담아서 상품 정보와 파일 정보를 데이터베이스에 저장
+
+---
+
+
+
